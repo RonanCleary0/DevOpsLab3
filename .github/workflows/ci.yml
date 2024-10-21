@@ -1,17 +1,27 @@
-name: 'Publish Immutable Action Version'
+name: C Build
+
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-      packages: write
+
     steps:
-      - name: Checking out
-        uses: actions/checkout@v4
-      - name: Publish
-        id: publish
-        uses: actions/publish-immutable-action@0.0.3
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Install build tools (if building a C program)
+    - name: Install build tools
+      run: sudo apt-get install -y build-essential
+
+    # Step 3: Run the build using Makefile (adjust if using a different build system)
+    - name: Build with Makefile
+      run: make
+
