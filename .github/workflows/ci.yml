@@ -26,5 +26,5 @@ jobs:
       uses: actions/upload-artifact@v3  # Already updated in previous step
       with:
         name: build-artifact
-        path: ./path/to/your/build/artifact
+        path: main
 
